@@ -6,7 +6,13 @@ load 3187sequences_blastscore.mat
 load 3187sequencesFamily.mat
 load 3187sequences_hmmscore.mat
 %load 3187sequences_fuzadaFeatures.mat
-x=[0 0 0 1];
+x=[0.25 0.05 0.3 0.4];
+% Result:
+% x=[0 0 0 1]: Auc1=0.6981 Auc50=0.7052
+% x=[0.25 0.2 0.35 0.2]: Auc1=0.7358 Auc50=0.7970
+% x=[0.25 0.1 0.35 0.3]: Auc1=0.7411 Auc50=0.8002
+% x=[0.25 0.05 0.4 0.3]: Auc1=0.7436 Auc50=0.8022
+% x=[0.25 0.05 0.3 0.4]: Auc1=0.7427 Auc50=0.8029
 Row = 3187;
 
 
