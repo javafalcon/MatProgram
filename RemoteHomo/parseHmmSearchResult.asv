@@ -10,8 +10,8 @@ while (ischar(tline) && ~isempty(tline))
         A = split(tline);
         targetProtein = A(1);
         queryProtein = A(3);
-        i = findStringInCell(heads, queryProtein);
-        j = findStringInCell(heads, targetProtein);
+        i = findStrFromCell(heads, queryProtein);
+        j = findStrFromCell(heads, targetProtein);
         hmmscore(i,j) = str2double(A(6));
         disp([queryProtein, targetProtein, num2str(hmmscore(i,j))]);
         tline = fgetl(fid);
