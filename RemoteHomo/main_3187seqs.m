@@ -1,3 +1,7 @@
+% modify recorde:
+% 2018-3-17 对各个特征的排序输出使用sotfmax函数
+% x=[1/4 1/4 1/4 1/4]: Auc1=0.7254 Auc50=0.7790
+% x=x=[0.6 0.02 0.33 0.05]: Auc1=0.7236 Auc50=0.7834
 clear;
 clc;
 load 3187sequences_Grey21PSSM.mat
@@ -30,7 +34,7 @@ load 3187sequences_hmmscore.mat
 % x=[0.25 0.02 0.28 0.45]: Auc1=0.7499 Auc50=0.8018
 % x=[0.2 0.02 0.28 0.5]: Auc1=0.7465 Auc50=0.8044
 
-x=[0.6 0.02 0.33 0.05];
+x=[0.3 0.02 0.28 0.4];
 Row = 3187;
 
 Auc50 = 0;
@@ -52,10 +56,14 @@ for i = 1 : Row
 %     r = GreyIncidenceDegree([testX_psepssm testX_glcm],[trainX_psepssm trainX_glcm]);
     r = GreyIncidenceDegree(testX_psepssm,trainX_psepssm);
     d = GreyIncidenceDegree(testX_glcm, trainX_glcm);    
-    b = mapminmax(bitscore(i,:),0,1);
-    h = mapminmax(hmmscore(i,ind),0,1);
-    dis=x(1)*r + x(2)*b + x(3)*d + x(4)*h;
+%     b = mapminmax(bitscore(i,:),0,1);
+%    h = mapminmax(hmmscore(i,ind),0,1);
+%    dis=x(1)*r + x(2)*b + x(3)*d + x(4)*h;
 %     dis=x(1)*r + x(2)*b;
+    % 2018-3-17 添加
+    b = bitscore(i,:);
+    h = hmmscore(i,ind);
+    dis = x(1)*softmax(r) + x(2)*softmax(b) + x(3)*softmax(d) + x(4)*softmax(h);
     Auc1 = Auc1 + AUCK(label_Y,dis,1,'descend');
     Auc50 = Auc50 + AUCK(label_Y,dis,50,'descend');
 end
