@@ -33,8 +33,9 @@ load 3187sequences_hmmscore.mat
 % x=[0.3 0.01 0.29 0.4]: Auc1=0.7499 Auc50=0.8018
 % x=[0.25 0.02 0.28 0.45]: Auc1=0.7499 Auc50=0.8018
 % x=[0.2 0.02 0.28 0.5]: Auc1=0.7465 Auc50=0.8044
+% x=[0.3 0 0.3 0.4]£ºAuc1=0.7345 Auc50=0.7895
 
-x=[0.3 0.02 0.28 0.4];
+x=[0 0.5 0 0.5];
 Row = 3187;
 
 Auc50 = 0;
@@ -56,14 +57,14 @@ for i = 1 : Row
 %     r = GreyIncidenceDegree([testX_psepssm testX_glcm],[trainX_psepssm trainX_glcm]);
     r = GreyIncidenceDegree(testX_psepssm,trainX_psepssm);
     d = GreyIncidenceDegree(testX_glcm, trainX_glcm);    
-%     b = mapminmax(bitscore(i,:),0,1);
-%    h = mapminmax(hmmscore(i,ind),0,1);
-%    dis=x(1)*r + x(2)*b + x(3)*d + x(4)*h;
-%     dis=x(1)*r + x(2)*b;
+    b = mapminmax(bitscore(i,:),0,1);
+    h = mapminmax(hmmscore(i,ind),0,1);
+    dis=x(1)*r + x(2)*b + x(3)*d + x(4)*h;
+
     % 2018-3-17 æ·»åŠ 
-    b = bitscore(i,:);
-    h = hmmscore(i,ind);
-    dis = x(1)*softmax(r) + x(2)*softmax(b) + x(3)*softmax(d) + x(4)*softmax(h);
+%     b = bitscore(i,:);
+%     h = hmmscore(i,ind);
+%     dis = x(1)*softmax(r) + x(2)*softmax(b) + x(3)*softmax(d) + x(4)*softmax(h);
     Auc1 = Auc1 + AUCK(label_Y,dis,1,'descend');
     Auc50 = Auc50 + AUCK(label_Y,dis,50,'descend');
 end
