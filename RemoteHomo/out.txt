@@ -1,0 +1,23 @@
+#                                                               --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+d1a4ea_              -          seq1                 -           1.3e-271  900.4   4.6  1.5e-271  900.2   4.6   1.0   1   0   0   1   1   1   1 e.5.1.1  (A:)  Catalase  I  {Baker's  yeast  (Saccharomyces cerevisiae)}
+d1dgfa_              -          seq1                 -           2.4e-254  843.5   2.4  2.8e-254  843.3   2.4   1.0   1   0   0   1   1   1   1 e.5.1.1 (A:) Catalase I {Human (Homo sapiens)}
+d4blca_              -          seq1                 -           2.8e-254  843.2   0.4  3.4e-254  843.0   0.4   1.0   1   0   0   1   1   1   1 e.5.1.1 (A:) Catalase I {Cow (Bos taurus)}
+d1e93a_              -          seq1                 -           8.8e-242  802.0   2.1    1e-241  801.9   2.1   1.0   1   0   0   1   1   1   1 e.5.1.1 (A:) Catalase I {Proteus mirabilis}
+d1hbza_              -          seq1                 -           3.5e-232  770.4   2.9  4.4e-232  770.1   2.9   1.0   1   0   0   1   1   1   1 e.5.1.1 (A:) Catalase I {Micrococcus lysodeikticus}
+d1cf9a2              -          seq1                 -           2.3e-226  751.2   0.2  3.1e-226  750.8   0.2   1.0   1   0   0   1   1   1   1 e.5.1.1 (A:27-597) Catalase II {Escherichia coli, HPII}
+d1aep__              -          seq1                 -              0.019   12.7   1.4     0.021   12.5   1.4   1.0   1   0   0   1   1   1   0 a.63.1.1 (-) Apolipophorin-III {African locust (Locusta migratoria)}
+d1dlya_              -          d1dlya_              -            6.2e-69  228.6   0.1   6.9e-69  228.5   0.1   1.0   1   0   0   1   1   1   1 a.1.1.1 (A:) Truncated hemoglobin {Green alga (Chlamydomonas eugametos)}
+d1idra_              -          d1dlya_              -              6e-56  186.7   0.1   6.7e-56  186.6   0.1   1.0   1   0   0   1   1   1   1 a.1.1.1   (A:)   Truncated   hemoglobin   {Mycobacterium tuberculosis}
+d1dlwa_              -          d1dlya_              -            2.9e-55  184.5   2.9   3.2e-55  184.4   2.9   1.0   1   0   0   1   1   1   1 a.1.1.1 (A:) Truncated hemoglobin {Ciliate (Paramecium caudatum)}
+#
+# Program:         jackhmmer
+# Version:         3.1b2 (February 2015)
+# Pipeline mode:   SEARCH
+# Query file:      input.fasta
+# Target file:     7329seqs.fasta
+# Option settings: jackhmmer --tblout out.txt input.fasta 7329seqs.fasta 
+# Current dir:     /cygdrive/e/MatProgram/RemoteHomo
+# Date:            Mon Mar 26 11:05:14 2018
+# [ok]
