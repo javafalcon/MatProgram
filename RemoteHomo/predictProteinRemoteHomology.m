@@ -16,10 +16,10 @@ function families = predictProteinRemoteHomology(queryProteinFile)
     [bitscore,~] = pairVals('blastpairfile', queryheads, trainheads);
     
     % hmmer score
-    cmd = ['jackhmmer  --tblout out.txt ' queryProteinFile ' 7329seqs.fasta'];
+    cmd = ['jackhmmer  --tblout hmmerscoreout.txt ' queryProteinFile ' 7329seqs.fasta'];
     system(cmd, '-echo');
     hmmscore = ones(qlen,tlen);
-    fid = fopen('out.txt','r');
+    fid = fopen('hmmerscoreout.txt','r');
     tline = fgetl(fid);
     while (ischar(tline) && ~isempty(tline))
         if( startsWith(tline, '#'))
