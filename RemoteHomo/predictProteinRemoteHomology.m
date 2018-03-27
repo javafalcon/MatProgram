@@ -5,14 +5,27 @@ function families = predictProteinRemoteHomology(queryProteinFile)
     load 7329sequencesFamily.mat %familyId: 1*7329; seqId: 1*7329
 
     x=[0.3 0.02 0.28 0.4];
-    p = blastpssm(queryProteinFile,'swissprot');
+    %p = blastpssm(queryProteinFile,'swissprot');
+    
     [queryheads,~]= fastaread(queryProteinFile);
     [trainheads,~] = fastaread('7329seqs.fasta');
+    
     qlen = length(queryheads);
     tlen = length(trainheads);
+    
+    for i = 1 : qlen
+        temp = split(queryheads{i});
+        queryheads{i} = temp(1);
+    end
+    for i = 1 : tlen
+        temp = split(trainheads{i});
+        trainheads{i} = temp(1);
+    end
+    
     families = cell(1,qlen);
     % psi-blast bit score
-    blastprotspair('7329seqs.fasta','7329seqsdb',queryProteinFile,'blastpairfile');
+    cmd = ['psiblast -db 7329seqsdb -query ' queryProteinFile ' -out blastpairfile -outfmt 6'];
+    system(cmd, '-echo')
     [bitscore,~] = pairVals('blastpairfile', queryheads, trainheads);
     
     % hmmer score
@@ -39,7 +52,7 @@ function families = predictProteinRemoteHomology(queryProteinFile)
     fclose(fid);
     
     % get pssm of query proteins
-    p=blastpssm(queryProteinFile,'swissprot');
+%     p=blastpssm(queryProteinFile,'swissprot');
     % glcm
     queryGlcm = getPSSM_GLCM(p);
     % grey(2,1) PSSM

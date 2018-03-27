@@ -47,7 +47,7 @@ d1idra_              -          d1dlwa_              -            8.1e-57  189.3
 # Pipeline mode:   SEARCH
 # Query file:      query.fasta
 # Target file:     7329seqs.fasta
-# Option settings: jackhmmer --tblout out.txt query.fasta 7329seqs.fasta 
+# Option settings: jackhmmer --tblout hmmerscoreout.txt query.fasta 7329seqs.fasta 
 # Current dir:     /cygdrive/e/MatProgram/RemoteHomo
-# Date:            Mon Mar 26 17:07:32 2018
+# Date:            Tue Mar 27 11:19:48 2018
 # [ok]

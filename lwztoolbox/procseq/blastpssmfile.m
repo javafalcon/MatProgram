@@ -8,7 +8,7 @@ cmd = ['psiblast -db ' db ' -query input.fasta -num_iterations 3 -evalue 0.001 -
 fid_pssm = fopen(pssmFile,'a');
 
 for k = 1 : row
-    k
+    %k
     fprintf(fid_pssm,'>%d\n',k);
     fid_in = fopen('input.fasta','w');
     fprintf(fid_in,seqs{k});
