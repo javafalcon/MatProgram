@@ -26,7 +26,7 @@ if ~ischar(heads)
         end
         
         %perform blast program
-        [~,~]=system(cmd);
+%         [~,~]=system(cmd);
         
         M = zeros(length(seqs{k}),40);
     
@@ -66,7 +66,7 @@ else %just only one sequence
     end
     
     %perform blast program
-    system(cmd);
+%     system(cmd);
       
     fid_out = fopen('pssmresult','r');
     

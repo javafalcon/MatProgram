@@ -1,5 +1,5 @@
 
-function [family, prob] = predictProteinRemoteHomology(queryProteinFile)
+function [families, prob] = predictProteinRemoteHomology(queryProteinFile)
     load 7329sequencesGrey21PSSM.mat %psepssm:7329*80
     load 7329sequences_pssm_GLCMFeature.mat %glcm :7329*4
     load 7329sequencesFamily.mat %familyId: 1*7329; seqId: 1*7329
@@ -9,27 +9,19 @@ function [family, prob] = predictProteinRemoteHomology(queryProteinFile)
     [queryheads,~]= fastaread(queryProteinFile);
     [trainheads,~] = fastaread('7329seqs.fasta');
     
-    
+    qlen = length(queryheads);
     tlen = length(trainheads);
     
-    if iscell(queryheads)
-        qlen = length(queryheads);
-        for i = 1 : qlen
-            temp = split(queryheads{i});
-            queryheads{i} = temp(1);
-        end
-    else
-        qlen = 1;
-        temp = split(queryheads);
-        queryheads = temp(1);
+    for i = 1 : qlen
+        temp = split(queryheads{i});
+        queryheads{i} = temp(1);
     end
-    
     for i = 1 : tlen
         temp = split(trainheads{i});
         trainheads{i} = temp(1);
     end
     
-    family = cell(1,qlen);
+    families = cell(1,qlen);
     prob = cell(1,qlen);
     
     % psi-blast bit score
@@ -54,18 +46,14 @@ function [family, prob] = predictProteinRemoteHomology(queryProteinFile)
             i = findStringInCell(queryheads, queryProtein);
             j = findStringInCell(trainheads, targetProtein);
             hmmscore(i,j) = str2double(A(6));
+            %disp([queryProtein, targetProtein, num2str(hmmscore(i,j))]);
             tline = fgetl(fid);
         end
     end
     fclose(fid);
     
     % get pssm of query proteins
-    tp=blastpssm(queryProteinFile,'swissprot');
-    if iscell(tp)
-        p = tp;
-    else
-        p{1} = tp;
-    end
+    p=blastpssm(queryProteinFile,'swissprot');
     % glcm
     queryGlcm = getPSSM_GLCM(p);
     % grey(2,1) PSSM
@@ -78,7 +66,7 @@ function [family, prob] = predictProteinRemoteHomology(queryProteinFile)
         h = mapminmax(hmmscore(i,:),0,1);
         dis=x(1)*r + x(2)*b + x(3)*d + x(4)*h;
         [B,I] = sort(dis,'descend');
-        family{i} = familyId(I(1));
+        families{i} = familyId(I(1));
         prob{i} = B(I(1));
     end
    
